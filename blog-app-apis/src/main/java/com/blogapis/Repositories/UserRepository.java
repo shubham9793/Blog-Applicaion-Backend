@@ -5,8 +5,12 @@ import org.springframework.stereotype.Repository;
 
 import com.blogapis.Entities.User;
 
+import java.util.Optional;
+
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
+
+    Optional<User> findByEmail(String Email);
 
 }

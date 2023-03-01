@@ -9,7 +9,10 @@ import com.blogapis.Payloads.UserDto;
 
 
 public interface UserService {
-	
+
+	// Register New User
+	UserDto registerNewUser(UserDto user);
+
 	UserDto createUser(UserDto user) ;
 	
 	UserDto updateUser(UserDto user,Integer userId);

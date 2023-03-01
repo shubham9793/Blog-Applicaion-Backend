@@ -3,8 +3,12 @@ package com.blogapis.Services.Impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.blogapis.Config.AppConstants;
+import com.blogapis.Entities.Role;
+import com.blogapis.Repositories.RoleRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.blogapis.Entities.User;
@@ -21,7 +25,28 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private ModelMapper modelMapper;
-	
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private RoleRepository roleRepository;
+
+	// Register New User
+	@Override
+	public UserDto registerNewUser(UserDto userDto) {
+		User user = this.modelMapper.map(userDto,User.class);
+		// set Encoded password
+		user.setPassword(this.passwordEncoder.encode(user.getPassword()));
+
+		//  get Role
+		Role role = this.roleRepository.findById(AppConstants.NORMAL_USER).get();
+
+		user.getRoles().add(role);
+
+		User newUser = this.userRepository.save(user);
+		return this.modelMapper.map(newUser,UserDto.class);
+	}
 
 	@Override
 	public UserDto createUser(UserDto userDto) {

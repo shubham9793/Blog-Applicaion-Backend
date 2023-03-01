@@ -2,8 +2,8 @@ package com.blogapis.Services;
 
 import java.util.List;
 
-import com.blogapis.Entities.Post;
 import com.blogapis.Payloads.PostDto;
+import com.blogapis.Payloads.PostResponse;
 
 
 public interface PostService {
@@ -21,7 +21,7 @@ public interface PostService {
 	
 	//Get All post
 	
-	List<PostDto> getAllPost(Integer pageNumber,Integer pageSize);
+	PostResponse getAllPost(Integer pageNumber,Integer pageSize,String sortBy,String sortDir);
 	
 	
 	// Get Single post
@@ -37,5 +37,5 @@ public interface PostService {
 	
 	
 	// Search post by its keywords
-	List<Post> searchPost(String keyword);
+	List<PostDto> searchPost(String keyword);
 }

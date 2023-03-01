@@ -4,11 +4,14 @@ package com.blogapis.Payloads;
 
 import javax.validation.constraints.Size;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+
+import java.util.*;
 
 @NoArgsConstructor
 
@@ -32,4 +35,6 @@ public class UserDto {
 	
 	@NotEmpty
 	private String about;
+
+	private Set<RoleDto> roles = new HashSet<>();
 }
